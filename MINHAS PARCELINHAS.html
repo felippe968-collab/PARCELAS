@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minhas Parcelinhas Gostosas</title>
+<style>
+  /* ===== TEMAS ===== */
+  body[data-theme="rosa"] {
+    --bg1:#ffe3ef; --bg2:#ffd6e8; --bg3:#ffeaf3;
+    --fg:#5c2340; --fg-muted:#a04570;
+    --acc1:#ff4f9a; --acc2:#ff7eb8;
+    --card:#fff; --card-border:#ffd9ea; --soft:#fff0f7; --dashed:#ffb3d4;
+    --track:#ffe0ef; --input-bg:#fffafc; --input-border:#ffd0e4;
+    --ok-bg:#d3f9d8; --ok-fg:#2b8a3e; --warn-bg:#ffe066; --warn-fg:#a06b00;
+    --open-bg:#ffe0ef; --open-fg:#c2255c;
+    --danger-fg:#c92a4d; --danger-border:#ffb3c0;
+  }
+  body[data-theme="dark"] {
+    --bg1:#1b1420; --bg2:#241a2c; --bg3:#1f1826;
+    --fg:#f2e6ee; --fg-muted:#b79cb0;
+    --acc1:#ff5c9f; --acc2:#d072e8;
+    --card:#2a2033; --card-border:#3d2b47; --soft:#332541; --dashed:#553a63;
+    --track:#3a2b45; --input-bg:#241a2c; --input-border:#4d3157;
+    --ok-bg:#1d3a27; --ok-fg:#69db7c; --warn-bg:#3d3413; --warn-fg:#ffd43b;
+    --open-bg:#3a2431; --open-fg:#ff8fb8;
+    --danger-fg:#ff8787; --danger-border:#6e3540;
+  }
+  body[data-theme="verde"] {
+    --bg1:#e4f8ea; --bg2:#d3f0dd; --bg3:#eafaf0;
+    --fg:#14532d; --fg-muted:#4d7c5f;
+    --acc1:#2f9e44; --acc2:#69db7c;
+    --card:#fff; --card-border:#c8f0d3; --soft:#e6f9ec; --dashed:#9fd8b0;
+    --track:#d9f2e2; --input-bg:#f7fef9; --input-border:#bfe8cd;
+    --ok-bg:#d3f9d8; --ok-fg:#2b8a3e; --warn-bg:#ffe066; --warn-fg:#a06b00;
+    --open-bg:#fde5e5; --open-fg:#c92a4d;
+    --danger-fg:#c92a4d; --danger-border:#f3b8b8;
+  }
+  body[data-theme="roxo"] {
+    --bg1:#efe7ff; --bg2:#e4d7ff; --bg3:#f3ecff;
+    --fg:#3b2a66; --fg-muted:#7a68a8;
+    --acc1:#7048e8; --acc2:#9775fa;
+    --card:#fff; --card-border:#dcceff; --soft:#f0e9ff; --dashed:#c5b3f5;
+    --track:#e6dcff; --input-bg:#fbf9ff; --input-border:#d8c8f8;
+    --ok-bg:#d3f9d8; --ok-fg:#2b8a3e; --warn-bg:#ffe066; --warn-fg:#a06b00;
+    --open-bg:#fde5e5; --open-fg:#c92a4d;
+    --danger-fg:#c92a4d; --danger-border:#f3b8b8;
+  }
+  body[data-theme="azul"] {
+    --bg1:#e3eefc; --bg2:#d5e6fa; --bg3:#eaf2fd;
+    --fg:#0f355f; --fg-muted:#4b7098;
+    --acc1:#1971c2; --acc2:#4dabf7;
+    --card:#fff; --card-border:#c9e0f8; --soft:#e7f1fd; --dashed:#a4cdf3;
+    --track:#d8e9fb; --input-bg:#f8fbff; --input-border:#b9d8f5;
+    --ok-bg:#d3f9d8; --ok-fg:#2b8a3e; --warn-bg:#ffe066; --warn-fg:#a06b00;
+    --open-bg:#fde5e5; --open-fg:#c92a4d;
+    --danger-fg:#c92a4d; --danger-border:#f3b8b8;
+  }
+  body[data-theme="amarelo"] {
+    --bg1:#fff2d9; --bg2:#ffe7bf; --bg3:#fff7e6;
+    --fg:#5c4300; --fg-muted:#a07c1e;
+    --acc1:#f08c00; --acc2:#fab005;
+    --card:#fff; --card-border:#ffe1a8; --soft:#fff4d6; --dashed:#f5c94f;
+    --track:#ffe9bf; --input-bg:#fffdf5; --input-border:#f3d78a;
+    --ok-bg:#d3f9d8; --ok-fg:#2b8a3e; --warn-bg:#ffe066; --warn-fg:#a06b00;
+    --open-bg:#fde5e5; --open-fg:#c92a4d;
+    --danger-fg:#c92a4d; --danger-border:#f3b8b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
+    min-height: 100vh; color: var(--fg); padding-bottom: 40px;
+  }
+  header {
+    background: linear-gradient(120deg, var(--acc1), var(--acc2));
+    color: #fff; padding: 22px 16px; text-align: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,.15);
+  }
+  header h1 { font-size: 1.5rem; letter-spacing: .5px; }
+  header p { font-size: .85rem; margin-top: 6px; opacity: .95; }
+  main { max-width: 720px; margin: 0 auto; padding: 16px; }
+  .card {
+    background: var(--card); border-radius: 18px; padding: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.10); margin-bottom: 16px;
+    border: 1px solid var(--card-border);
+  }
+  h2 { color: var(--acc1); margin-bottom: 12px; font-size: 1.15rem; }
+  .welcome { font-size: 1.3rem; font-weight: 700; color: var(--acc1); margin-bottom: 14px; }
+  .btn {
+    display: inline-block; border: none; cursor: pointer; font-weight: 600;
+    background: linear-gradient(120deg, var(--acc1), var(--acc2)); color: #fff;
+    padding: 12px 20px; border-radius: 999px; font-size: .95rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15); transition: transform .1s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost { background: var(--card); color: var(--acc1); border: 2px solid var(--dashed); box-shadow: none; }
+  .btn.small { padding: 7px 14px; font-size: .8rem; }
+  .btn.danger { background: var(--card); color: var(--danger-fg); border: 2px solid var(--danger-border); box-shadow: none; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  label { display: block; font-weight: 600; margin: 12px 0 5px; font-size: .9rem; }
+  input[type=text], input[type=number], input[type=date], select {
+    width: 100%; padding: 11px 12px; border: 2px solid var(--input-border); border-radius: 12px;
+    font-size: 1rem; background: var(--input-bg); color: var(--fg); outline: none;
+  }
+  select { cursor: pointer; }
+  input:focus, select:focus { border-color: var(--acc2); }
+  .radios { display: flex; gap: 16px; align-items: center; margin-top: 5px; flex-wrap: wrap; }
+  .radios label { display: flex; align-items: center; gap: 6px; margin: 0; cursor: pointer; }
+  .preview {
+    background: var(--soft); border-radius: 12px; padding: 12px; margin-top: 14px;
+    font-size: .9rem; line-height: 1.7; border: 1px dashed var(--dashed);
+  }
+  .actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .acct-card {
+    background: var(--card); border-radius: 16px; padding: 16px; margin-bottom: 12px;
+    border: 1px solid var(--card-border); cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    transition: box-shadow .15s;
+  }
+  .acct-card:hover { box-shadow: 0 6px 18px rgba(0,0,0,.15); }
+  .acct-title { font-weight: 700; font-size: 1.05rem; color: var(--acc1); }
+  .acct-sub { font-size: .82rem; color: var(--fg-muted); margin-top: 4px; }
+  .bar { height: 10px; background: var(--track); border-radius: 999px; margin-top: 10px; overflow: hidden; }
+  .bar > div { height: 100%; background: linear-gradient(90deg, var(--acc1), var(--acc2)); border-radius: 999px; }
+  .empty { text-align: center; color: var(--fg-muted); padding: 30px 10px; font-size: .95rem; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(130px,1fr)); gap: 10px; margin: 14px 0; }
+  .stat { background: var(--soft); border-radius: 12px; padding: 10px 12px; }
+  .stat .k { font-size: .72rem; color: var(--fg-muted); text-transform: uppercase; font-weight: 700; }
+  .stat .v { font-size: 1.02rem; font-weight: 700; color: var(--acc1); margin-top: 2px; }
+  .donut-wrap { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .donut { width: 150px; height: 150px; position: relative; flex-shrink: 0; }
+  .donut .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .donut .center .pct { font-size: 1.5rem; font-weight: 800; color: var(--acc1); }
+  .donut .center .lbl { font-size: .68rem; color: var(--fg-muted); }
+  .donut-track { stroke: var(--track); }
+  .donut-arc { stroke: var(--acc1); }
+  .legend { font-size: .88rem; line-height: 1.9; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .dot-pago { background: var(--acc1); }
+  .dot-rest { background: var(--track); }
+  .inst {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 4px; border-bottom: 1px solid var(--card-border); font-size: .9rem;
+  }
+  .inst:last-child { border-bottom: none; }
+  .inst .num { font-weight: 800; color: var(--acc1); min-width: 34px; }
+  .inst .date { min-width: 96px; }
+  .inst .val { font-weight: 600; min-width: 100px; }
+  .badge { font-size: .68rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+  .badge.payd { background: var(--ok-bg); color: var(--ok-fg); }
+  .badge.amort { background: var(--warn-bg); color: var(--warn-fg); }
+  .badge.open { background: var(--open-bg); color: var(--open-fg); }
+  .check { display: flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 600; cursor: pointer; margin-left: auto; }
+  .check input { width: 18px; height: 18px; accent-color: var(--acc1); cursor: pointer; }
+  .disc { font-size: .78rem; color: var(--fg-muted); }
+  .disc input { width: 110px; padding: 6px 8px; font-size: .8rem; }
+  .disc .btn.small { padding: 5px 12px; font-size: .75rem; }
+  .inst .val s { color: var(--fg-muted); font-weight: 400; margin-right: 5px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .hidden { display: none !important; }
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--acc1); color: #fff; padding: 10px 20px; border-radius: 999px;
+    font-size: .85rem; box-shadow: 0 6px 18px rgba(0,0,0,.3); opacity: 0;
+    transition: opacity .3s; pointer-events: none; z-index: 99;
+  }
+  .toast.show { opacity: 1; }
+  footer { text-align: center; font-size: .75rem; color: var(--fg-muted); margin-top: 26px; }
+</style>
+</head>
+<body data-theme="rosa">
+<header>
+  <h1>&hearts; Minhas Parcelinhas Gostosas &hearts;</h1>
+  <p>Controle f&aacute;cil f&aacute;cil aqui seus carnezinhos gostosos!!! &hearts;</p>
+</header>
+<main>
+
+  <!-- ============ TELA INICIAL ============ -->
+  <section id="screen-home">
+    <div class="card">
+      <div class="welcome" id="welcome"></div>
+      <button class="btn" onclick="openForm()">&#43; Inserir conta</button>
+    </div>
+
+    <div class="card hidden" id="name-card">
+      <h2>Primeiro, como posso te chamar? &#128131;</h2>
+      <input type="text" id="name-input" placeholder="Seu nome aqui...">
+      <div class="actions"><button class="btn" onclick="saveName()">Salvar</button></div>
+    </div>
+
+    <div id="accounts-list"></div>
+
+    <!-- ===== AJUSTES ===== -->
+    <div class="card">
+      <h2>Ajustes</h2>
+      <label>Tema</label>
+      <select id="theme-select" onchange="setTheme(this.value)">
+        <option value="rosa">&#9829; Rosa (padr&atilde;o)</option>
+        <option value="dark">&#127769; Dark</option>
+        <option value="verde">&#127807; Verde</option>
+        <option value="roxo">&#128156; Roxo</option>
+        <option value="azul">&#128153; Azul</option>
+        <option value="amarelo">&#9728; Amarelo</option>
+      </select>
+
+      <div class="actions">
+        <button class="btn small ghost" onclick="exportBackup()">&#128190; Exportar backup (JSON)</button>
+        <button class="btn small ghost" onclick="document.getElementById('import-file').click()">&#128229; Importar backup (JSON)</button>
+        <input type="file" id="import-file" accept=".json,application/json" class="hidden" onchange="importBackup(this)">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORM NOVA CONTA ============ -->
+  <section id="screen-form" class="hidden">
+    <div class="card">
+      <h2 id="form-title">&#43; Nova conta</h2>
+
+      <label>Nome da conta</label>
+      <input type="text" id="f-name" placeholder="Ex.: financiamento carro">
+
+      <label>Qual o valor de cada parcela? (R$)</label>
+      <input type="number" id="f-value" min="0" step="0.01" placeholder="Ex.: 850,00" oninput="updatePreview()">
+
+      <label>Primeira parcela? (data)</label>
+      <input type="date" id="f-first" oninput="updatePreview()">
+
+      <label>Parcelado em quantas vezes?</label>
+      <input type="number" id="f-count" min="1" step="1" placeholder="Ex.: 48" oninput="updatePreview()">
+
+      <label>Esse valor &eacute; fixo ou tem acr&eacute;scimo mensal?</label>
+      <div class="radios">
+        <label><input type="radio" name="f-type" value="fixo" checked onchange="toggleIncrease()"> Valor fixo</label>
+        <label><input type="radio" name="f-type" value="acrescimo" onchange="toggleIncrease()"> Tem acr&eacute;scimo</label>
+      </div>
+
+      <div id="inc-box" class="hidden">
+        <label>Qual o valor desse acr&eacute;scimo? (% ao m&ecirc;s)</label>
+        <input type="number" id="f-inc" min="0" step="0.01" value="0.5" oninput="updatePreview()">
+      </div>
+
+      <div class="preview" id="preview"></div>
+
+      <div class="actions">
+        <button class="btn" onclick="submitForm()">&#10004; Concluir</button>
+        <button class="btn ghost" onclick="showScreen('home')">&#8592; Voltar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DETALHE DA CONTA ============ -->
+  <section id="screen-detail" class="hidden">
+    <div class="card">
+      <div class="topbar">
+        <h2 id="d-title" style="margin:0"></h2>
+        <div style="display:flex; gap:8px;">
+          <button class="btn small ghost" onclick="showScreen('home')">&#8592; Voltar</button>
+          <button class="btn small danger" onclick="deleteAccount()">&#128465; Excluir conta</button>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat"><div class="k">Valor total</div><div class="v" id="d-total"></div></div>
+        <div class="stat"><div class="k">J&aacute; pago</div><div class="v" id="d-paid"></div></div>
+        <div class="stat"><div class="k">Falta pagar</div><div class="v" id="d-rest"></div></div>
+        <div class="stat"><div class="k">&Uacute;ltima parcela</div><div class="v" id="d-last"></div></div>
+      </div>
+
+      <div class="donut-wrap">
+        <div class="donut">
+          <svg width="150" height="150" viewBox="0 0 150 150">
+            <circle class="donut-track" cx="75" cy="75" r="62" fill="none" stroke-width="18"></circle>
+            <circle id="d-arc" class="donut-arc" cx="75" cy="75" r="62" fill="none" stroke-width="18"
+                    stroke-linecap="round" transform="rotate(-90 75 75)"></circle>
+          </svg>
+          <div class="center"><div class="pct" id="d-pct">0%</div><div class="lbl">pago</div></div>
+        </div>
+        <div class="legend">
+          <div><span class="dot dot-pago"></span>Pago: <b id="l-paid"></b></div>
+          <div><span class="dot dot-rest"></span>A pagar: <b id="l-rest"></b></div>
+          <div style="margin-top:6px; font-size:.8rem; color:var(--fg-muted)" id="l-count"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="topbar">
+        <h2 style="margin:0">Parcelas</h2>
+        <div style="display:flex; gap:8px;">
+          <button class="btn small ghost" id="bulk-toggle" onclick="toggleBulk()">&#9889; Baixa em massa</button>
+          <button class="btn small hidden" id="bulk-do" onclick="bulkPay()" disabled>Dar baixa (0)</button>
+          <button class="btn small ghost hidden" id="bulk-all" onclick="selectAllPending()">Selecionar pendentes</button>
+        </div>
+      </div>
+      <div id="installments"></div>
+    </div>
+  </section>
+
+  <footer>Minhas Parcelinhas Gostosas &hearts; &mdash; seus dados ficam salvinhos neste navegador &#128274;</footer>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+var LS_KEY = "parcelinhas_gostosas_v1";
+var state = load();
+var currentId = null;
+var bulkMode = false;
+
+function load() {
+  try {
+    var s = JSON.parse(localStorage.getItem(LS_KEY));
+    if (s && typeof s === "object" && Array.isArray(s.accounts)) {
+      normalizeAccounts(s.accounts);
+      return s;
+    }
+  } catch (e) {}
+  return { userName: null, accounts: [], theme: "rosa" };
+}
+function save() { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+
+function normalizeAccounts(accs) {
+  (accs || []).forEach(function (a) {
+    (a.installments || []).forEach(function (p) {
+      if (p.paidValue == null && p.discount > 0) p.paidValue = round2(p.value - p.discount);
+      if (p.paidValue == null) p.paidValue = null;
+      if (p.discountDone == null) p.discountDone = (p.paidValue != null);
+    });
+  });
+  return accs;
+}
+
+/* ---------- utils ---------- */
+function money(v) { return Number(v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+function round2(v) { return Math.round(v * 100) / 100; }
+function today() { var d = new Date(); return iso(d); }
+function iso(d) {
+  var m = (d.getMonth() + 1 + ""), dd = (d.getDate() + "");
+  return d.getFullYear() + "-" + (m.length < 2 ? "0" + m : m) + "-" + (dd.length < 2 ? "0" + dd : dd);
+}
+function addMonths(dateStr, n) {
+  var p = dateStr.split("-").map(Number);
+  var t = new Date(p[0], p[1] - 1 + n, 1);
+  var last = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
+  t.setDate(Math.min(p[2], last));
+  return iso(t);
+}
+function brDate(dateStr) {
+  var p = dateStr.split("-");
+  return p[2] + "/" + p[1] + "/" + p[0];
+}
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._h);
+  t._h = setTimeout(function () { t.classList.remove("show"); }, 2600);
+}
+
+/* ---------- tema ---------- */
+function applyTheme() {
+  var t = state.theme || "rosa";
+  document.body.setAttribute("data-theme", t);
+  document.getElementById("theme-select").value = t;
+}
+function setTheme(t) {
+  state.theme = t;
+  save();
+  applyTheme();
+  toast("Tema " + t + " aplicado! &#9829;");
+}
+
+/* ---------- telas ---------- */
+function showScreen(name) {
+  ["home", "form", "detail"].forEach(function (s) {
+    document.getElementById("screen-" + s).classList.toggle("hidden", s !== name);
+  });
+  if (name === "home") renderHome();
+  window.scrollTo(0, 0);
+}
+
+/* ---------- nome do usuario ---------- */
+function saveName() {
+  var n = document.getElementById("name-input").value.trim();
+  if (!n) { toast("Fala teu nome, fofa(o)! &#9829;"); return; }
+  state.userName = n;
+  save();
+  renderHome();
+  toast("Bem vindo(a), " + n + "! &#9829;");
+}
+
+/* ---------- home ---------- */
+function renderHome() {
+  var hasName = !!state.userName;
+  document.getElementById("name-card").classList.toggle("hidden", hasName);
+  document.getElementById("welcome").innerHTML =
+    "Bem vindo!!! " + (hasName ? escapeHtml(state.userName) : "Usuário");
+
+  var list = document.getElementById("accounts-list");
+  if (!state.accounts.length) {
+    list.innerHTML = '<div class="empty">Nenhuma conta ainda... &#128546;<br>Aperta em <b>+ Inserir conta</b> e bora organizar esses carnezinhos!</div>';
+    return;
+  }
+  var html = "";
+  state.accounts.forEach(function (a, i) {
+    var totals = calcTotals(a);
+    var pct = totals.total > 0 ? Math.round((totals.paid / totals.total) * 100) : 0;
+    html += '<div class="acct-card" onclick="openDetail(' + a.id + ')">' +
+      '<div class="acct-title">Conta ' + (i + 1) + ": " + escapeHtml(a.name) + "</div>" +
+      '<div class="acct-sub">' + a.installments.length + "x de " + money(a.installments[0].value) +
+      (a.increasePct > 0 ? " (+" + a.increasePct + "%/m&ecirc;s)" : " (fixo)") +
+      " &bull; total " + money(totals.total) + " &bull; " + pct + "% pago" +
+      " &bull; &uacute;ltima: " + brDate(a.installments[a.installments.length - 1].dueDate) + "</div>" +
+      '<div class="bar"><div style="width:' + pct + '%"></div></div></div>';
+  });
+  list.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+/* ---------- backup ---------- */
+function exportBackup() {
+  var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "parcelinhas-backup-" + today() + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  toast("Backup exportado! Guarda esse arquivinho &#128190;");
+}
+
+function importBackup(input) {
+  var f = input.files && input.files[0];
+  if (!f) return;
+  var r = new FileReader();
+  r.onload = function () {
+    try {
+      var data = JSON.parse(r.result);
+      if (!data || typeof data !== "object" || !Array.isArray(data.accounts)) throw new Error("invalido");
+      if (!confirm("Importar backup com " + data.accounts.length + " conta(s)?\nIsso substitui tudo que est&aacute; agora no app.")) {
+        input.value = "";
+        return;
+      }
+      state = {
+        userName: (typeof data.userName === "string") ? data.userName : null,
+        accounts: normalizeAccounts(data.accounts),
+        theme: data.theme || "rosa"
+      };
+      save();
+      applyTheme();
+      showScreen("home");
+      toast("Backup importado! &#9829;");
+    } catch (e) {
+      toast("Ops! Esse arquivo n&atilde;o parece ser um backup v&aacute;lido.");
+    }
+    input.value = "";
+  };
+  r.readAsText(f);
+}
+
+/* ---------- form ---------- */
+function openForm() {
+  ["f-name", "f-value", "f-count"].forEach(function (id) { document.getElementById(id).value = ""; });
+  document.getElementById("f-first").value = "";
+  document.getElementById("f-inc").value = "0.5";
+  document.querySelector('input[name="f-type"][value="fixo"]').checked = true;
+  toggleIncrease();
+  updatePreview();
+  showScreen("form");
+}
+
+function toggleIncrease() {
+  var inc = document.querySelector('input[name="f-type"]:checked').value === "acrescimo";
+  document.getElementById("inc-box").classList.toggle("hidden", !inc);
+  updatePreview();
+}
+
+function updatePreview() {
+  var v = parseFloat(document.getElementById("f-value").value);
+  var first = document.getElementById("f-first").value;
+  var n = parseInt(document.getElementById("f-count").value, 10);
+  var inc = document.querySelector('input[name="f-type"]:checked').value === "acrescimo"
+    ? (parseFloat(document.getElementById("f-inc").value) || 0) : 0;
+
+  var el = document.getElementById("preview");
+  if (!(v > 0) || !first || !(n > 0)) {
+    el.innerHTML = "Preenche a&iacute; em cima que eu j&aacute; te mostro o resumo bonitinho &#128139;";
+    return;
+  }
+  var total = 0;
+  for (var i = 0; i < n; i++) total += round2(v * Math.pow(1 + inc / 100, i));
+  var lastDate = addMonths(first, n - 1);
+  el.innerHTML = "Total da conta: <b>" + money(total) + "</b><br>" +
+    "Primeira parcela: <b>" + brDate(first) + "</b> &nbsp;&bull;&nbsp; " +
+    "&Uacute;ltima parcela: <b>" + brDate(lastDate) + "</b> (" + n + "x)";
+}
+
+function submitForm() {
+  var name = document.getElementById("f-name").value.trim();
+  var v = parseFloat(document.getElementById("f-value").value);
+  var first = document.getElementById("f-first").value;
+  var n = parseInt(document.getElementById("f-count").value, 10);
+  var inc = document.querySelector('input[name="f-type"]:checked').value === "acrescimo"
+    ? (parseFloat(document.getElementById("f-inc").value) || 0) : 0;
+
+  if (!name) { toast("Coloca o nome da conta &#128536;"); return; }
+  if (!(v > 0)) { toast("Qual o valor da parcela?"); return; }
+  if (!first) { toast("Qual a data da primeira parcela?"); return; }
+  if (!(n > 0)) { toast("Parcelado em quantas vezes?"); return; }
+
+  var installments = [];
+  for (var i = 0; i < n; i++) {
+    installments.push({
+      seq: i + 1,
+      dueDate: addMonths(first, i),
+      value: round2(v * Math.pow(1 + inc / 100, i)),
+      paid: false,
+      discount: 0
+    });
+  }
+  var acc = {
+    id: Date.now(),
+    name: name,
+    increasePct: inc,
+    installments: installments
+  };
+  state.accounts.push(acc);
+  save();
+  toast("Conta inserida! &#9829;");
+  showScreen("home");
+}
+
+/* ---------- detalhe ---------- */
+function openDetail(id) {
+  currentId = id;
+  bulkMode = false;
+  renderDetail();
+  showScreen("detail");
+}
+
+function findAcc() {
+  for (var i = 0; i < state.accounts.length; i++)
+    if (state.accounts[i].id === currentId) return state.accounts[i];
+  return null;
+}
+
+function calcTotals(a) {
+  var total = 0, paid = 0;
+  a.installments.forEach(function (p) {
+    total += p.value;
+    if (p.paid) paid += (p.paidValue != null ? p.paidValue : p.value);
+  });
+  return { total: round2(total), paid: round2(paid), rest: round2(total - paid) };
+}
+
+function renderDetail() {
+  var a = findAcc();
+  if (!a) { showScreen("home"); return; }
+  var idx = state.accounts.indexOf(a) + 1;
+
+  document.getElementById("d-title").innerHTML = "Conta " + idx + ": " + escapeHtml(a.name);
+  var t = calcTotals(a);
+  document.getElementById("d-total").textContent = money(t.total);
+  document.getElementById("d-paid").textContent = money(t.paid);
+  document.getElementById("d-rest").textContent = money(t.rest);
+  document.getElementById("d-last").textContent = brDate(a.installments[a.installments.length - 1].dueDate);
+
+  var pct = t.total > 0 ? t.paid / t.total : 0;
+  var pctTxt = Math.round(pct * 100);
+  document.getElementById("d-pct").textContent = pctTxt + "%";
+  var circ = 2 * Math.PI * 62;
+  var arc = document.getElementById("d-arc");
+  arc.setAttribute("stroke-dasharray", (circ * pct) + " " + circ);
+  arc.setAttribute("stroke-dashoffset", "0");
+
+  document.getElementById("l-paid").textContent = money(t.paid);
+  document.getElementById("l-rest").textContent = money(t.rest);
+  var nPaid = a.installments.filter(function (p) { return p.paid; }).length;
+  document.getElementById("l-count").textContent =
+    nPaid + " de " + a.installments.length + " parcelas pagas";
+
+  document.getElementById("bulk-toggle").classList.toggle("hidden", bulkMode);
+  document.getElementById("bulk-do").classList.toggle("hidden", !bulkMode);
+  document.getElementById("bulk-all").classList.toggle("hidden", !bulkMode);
+
+  var tdy = today();
+  var html = "";
+  a.installments.forEach(function (p) {
+    var shownVal = (p.paid && p.paidValue != null && p.paidValue !== p.value)
+      ? "<s>" + money(p.value) + "</s>" + money(p.paidValue)
+      : money(p.value);
+    var isFuture = p.dueDate > tdy;
+    var badge, badgeCls;
+    if (p.paid) {
+      if (isFuture) { badge = "Amortizada!"; badgeCls = "amort"; }
+      else { badge = "Paga"; badgeCls = "payd"; }
+    } else {
+      badge = "Pendente"; badgeCls = "open";
+    }
+    html += '<div class="inst">' +
+      '<span class="num">#' + p.seq + "</span>" +
+      '<span class="date">' + brDate(p.dueDate) + "</span>" +
+      '<span class="val">' + shownVal + "</span>" +
+      '<span class="badge ' + badgeCls + '">' + badge + "</span>";
+
+    if (bulkMode && !p.paid) {
+      html += '<label class="check"><input type="checkbox" class="bulk-check" onchange="bulkSelChanged()" ' +
+        'data-seq="' + p.seq + '"></label>';
+    } else {
+      html += '<label class="check"><input type="checkbox" onchange="togglePaid(' + p.seq + ', this.checked)" ' +
+        (p.paid ? "checked" : "") + "> paga?</label>";
+    }
+
+    if (p.paid && isFuture && !p.discountDone) {
+      html += '<span class="disc">Desconto? - valor pago: <input type="number" id="pv-' + p.seq +
+        '" min="0" step="0.01" value="' + (p.paidValue != null ? p.paidValue : p.value) +
+        '"> <button class="btn small" onclick="setPaidValue(' + p.seq + ')">OK</button></span>';
+    }
+    html += "</div>";
+  });
+  document.getElementById("installments").innerHTML = html;
+  bulkSelChanged();
+}
+
+/* ---------- acoes nas parcelas ---------- */
+function togglePaid(seq, checked) {
+  var a = findAcc();
+  if (!a) return;
+  var p = a.installments[seq - 1];
+  p.paid = checked;
+  if (!checked) { p.paidValue = null; p.discountDone = false; }
+  save();
+  renderDetail();
+  toast(checked ? "Parcela #" + seq + " computada como paga! &#9829;" : "Parcela #" + seq + " desmarcada.");
+}
+
+function setPaidValue(seq) {
+  var a = findAcc();
+  if (!a) return;
+  var p = a.installments[seq - 1];
+  var val = parseFloat(document.getElementById("pv-" + seq).value);
+  p.paidValue = (isNaN(val) || val < 0) ? p.value : round2(val);
+  p.discountDone = true;
+  save();
+  renderDetail();
+  toast("Valor pago salvinho! &#9829;");
+}
+
+function deleteAccount() {
+  var a = findAcc();
+  if (!a) return;
+  if (!confirm('Excluir a conta "' + a.name + '" inteirinha? Isso apaga tudo dela.')) return;
+  state.accounts = state.accounts.filter(function (x) { return x.id !== currentId; });
+  save();
+  toast("Conta exclu&iacute;da.");
+  showScreen("home");
+}
+
+/* ---------- baixa em massa ---------- */
+function toggleBulk() {
+  bulkMode = !bulkMode;
+  renderDetail();
+  if (bulkMode) toast("Modo baixa em massa: marca quantas quiser e manda ver! &#9889;");
+}
+
+function selectAllPending() {
+  var checks = document.querySelectorAll(".bulk-check");
+  var allOn = Array.prototype.every.call(checks, function (c) { return c.checked; });
+  checks.forEach(function (c) { c.checked = !allOn; });
+  bulkSelChanged();
+}
+
+function bulkSelChanged() {
+  var n = document.querySelectorAll(".bulk-check:checked").length;
+  var btn = document.getElementById("bulk-do");
+  btn.textContent = "Dar baixa (" + n + ")";
+  btn.disabled = n === 0;
+}
+
+function bulkPay() {
+  var a = findAcc();
+  if (!a) return;
+  var checks = document.querySelectorAll(".bulk-check:checked");
+  var tdy = today();
+  var n = 0, amort = 0;
+  checks.forEach(function (c) {
+    var p = a.installments[parseInt(c.dataset.seq, 10) - 1];
+    if (!p.paid) {
+      p.paid = true;
+      n++;
+      if (p.dueDate > tdy) amort++;
+    }
+  });
+  save();
+  bulkMode = false;
+  renderDetail();
+  toast("Baixa dada em " + n + " parcela(s)" + (amort ? " (" + amort + " amortizada(s)!)" : "") + " &#9829;");
+}
+
+/* ---------- inicio ---------- */
+applyTheme();
+renderHome();
+</script>
+</body>
+</html>
